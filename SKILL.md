@@ -142,8 +142,14 @@ if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
   PYTHON_BIN="python"
 fi
 
-"$PYTHON_BIN" "$SCRIPT_PATH" "$BOOK_PATH" --mode <BOOK_TYPE>
+"$PYTHON_BIN" "$SCRIPT_PATH" "$BOOK_PATH" --mode <BOOK_TYPE> --install-missing ask
 ```
+
+Before extraction, the script checks optional Python packages needed for the detected format. If a better extractor is missing, it prompts the user with the available fallback, for example:
+
+> "DOCX extraction uses python-docx if installed, otherwise a stdlib ZIP/XML parser. Missing package(s) detected. Do you want to install? y=install, n=fallback"
+
+Use `--install-missing yes` to install missing Python packages without prompting, `--install-missing no` or `--no-install-missing` to always use fallbacks, or `BOOK_SKILL_INSTALL_MISSING=yes|no|ask` to set the behavior by environment variable. Non-interactive sessions default to fallback unless install mode is explicitly `yes`.
 
 - PDF `--mode technical` → uses Docling (layout-aware, preserves tables and code blocks as markdown)
 - PDF `--mode text` → uses pdftotext → PyPDF2 → pdfminer fallback chain (fast, plain text)
@@ -152,7 +158,7 @@ fi
 - TXT/Markdown/reStructuredText/AsciiDoc → reads directly as text
 - HTML → uses BeautifulSoup4, then stdlib HTML fallback
 - RTF → uses striprtf, then a basic regex fallback
-- MOBI/AZW/AZW3 → uses Calibre `ebook-convert` when installed
+- MOBI/AZW/AZW3 → uses Calibre `ebook-convert` when installed. Calibre is an external app, not a pip package, so the script reports how to install it if missing.
 
 This creates:
 - `<tempdir>/book_skill_work/full_text.txt` — full extracted text
