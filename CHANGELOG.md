@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   CLI / Amp), while **`pip install book-to-skill`** installs only the standalone
   extraction CLI and does not register the skill. README and the docs landing now
   show both explicitly.
+- README now leads with the measured headline (24×–51× fewer tokens than a
+  context-dump) and a 3-step "how it works", so the value lands in the first
+  screen instead of being buried mid-page.
 
 ### Security
 - **DOCX XXE / Billion Laughs hardening** — the DOCX extractor now scans the

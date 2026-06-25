@@ -33,6 +33,16 @@
   <a href="docs/ARCHITECTURE.md">Architecture</a>
 </p>
 
+<p align="center">
+  <strong>24×–51× fewer tokens than dumping the book into context</strong> to answer one question, measured on real books (<a href="#-the-discovery-loop-tax">how it's measured</a>).
+</p>
+
+**How it works, in 3 steps:**
+
+1. **Point** it at a file, folder, or glob — `/book-to-skill ./my-book.pdf`
+2. **It distills** the book into a skill — frameworks, decision rules, anti-patterns, and per-chapter files. Structure, not a summary.
+3. **Your agent loads it on demand** — ask `/my-book replication` and it reads the right chapter and answers from the real content, no hallucination.
+
 ---
 
 ## 🤔 Why
